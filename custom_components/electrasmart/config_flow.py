@@ -9,7 +9,15 @@ from electrasmart.api import STATUS_SUCCESS, Attributes, ElectraAPI, ElectraApiE
 from electrasmart.api.utils import generate_imei
 import voluptuous as vol
 
-from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
+from homeassistant.config_entries import ConfigFlow
+
+try:
+    # Try importing the modern 2024.4+ type annotation
+    from homeassistant.config_entries import ConfigFlowResult
+except ImportError:
+    # Fallback for Home Assistant versions older than 2024.4
+    from homeassistant.data_entry_flow import FlowResult as ConfigFlowResult
+
 from homeassistant.const import CONF_TOKEN
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
